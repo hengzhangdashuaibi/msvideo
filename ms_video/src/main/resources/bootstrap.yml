@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: msvideo
+  cloud:
+    config:
+      uri: ${config.server.uri:http://config-server.marathon.mesos:8888}
+server:
+  port: 8080
