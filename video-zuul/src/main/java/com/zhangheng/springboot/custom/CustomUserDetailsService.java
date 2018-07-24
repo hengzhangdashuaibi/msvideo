@@ -1,6 +1,8 @@
 package com.zhangheng.springboot.custom;
 
 
+import com.zhangheng.springboot.feign.UserInfoFeign;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.cas.authentication.CasAssertionAuthenticationToken;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +14,9 @@ import java.util.Set;
 /**
  * Created by 蜡笔小新不爱吃青椒 on 2018/7/20.
  */
-public class CustomUserDetailsService /*
+public class CustomUserDetailsService
+
+        /*
 	//实现UserDetailsService接口，实现loadUserByUsername方法
 	implements UserDetailsService {
 	@Override
@@ -30,20 +34,34 @@ public class CustomUserDetailsService /*
 	}*/
 
 
+
         //实现AuthenticationUserDetailsService，实现loadUserDetails方法
         implements AuthenticationUserDetailsService<CasAssertionAuthenticationToken> {
+
+
+    //注入feign
+    @Autowired
+    private UserInfoFeign userInfoFeign;
 
     @Override
     public UserDetails loadUserDetails(CasAssertionAuthenticationToken token) throws UsernameNotFoundException {
         System.out.println("当前的用户名是："+token.getName());
+
+        String userInfoByUsername = userInfoFeign.getUserInfoByUsername(token.getName());
+
+        System.out.println("接口返回："+userInfoByUsername);
+
 		/*这里我为了方便，就直接返回一个用户信息，实际当中这里修改为查询数据库或者调用服务什么的来获取用户信息*/
         UserInfo userInfo = new UserInfo();
-        userInfo.setUsername("admin");
-        userInfo.setName("admin");
+        userInfo.setUsername(token.getName());
+        userInfo.setName(token.getName());
         Set<AuthorityInfo> authorities = new HashSet<AuthorityInfo>();
         AuthorityInfo authorityInfo = new AuthorityInfo("TEST");
         authorities.add(authorityInfo);
         userInfo.setAuthorities(authorities);
+        userInfo.setAccountNonLocked(true);
+        userInfo.setAccountNonExpired(true);
+        userInfo.setCredentialsNonExpired(true);
         return userInfo;
     }
 
