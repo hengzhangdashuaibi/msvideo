@@ -125,6 +125,14 @@
             <version>1.8.10</version>
         </dependency>
 
+        <!--加入cas-client-autoconfig-support依赖-->
+        <dependency>
+            <groupId>net.unicon.cas</groupId>
+            <artifactId>cas-client-autoconfig-support</artifactId>
+            <version>1.5.0-GA</version>
+        </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
