@@ -27,7 +27,13 @@ public class User {
     private String name;
 
     //角色
-    private String rule;
+    private String role;
+
+    //用户头像
+    private String userface;
+
+    //是否启用(1:启用,0:禁用)
+    private Integer isenable;
 
 
     public Long getId() {
@@ -62,11 +68,27 @@ public class User {
         this.name = name;
     }
 
-    public String getRule() {
-        return rule;
+    public String getRole() {
+        return role;
     }
 
-    public void setRule(String rule) {
-        this.rule = rule;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getUserface() {
+        return userface;
+    }
+
+    public void setUserface(String userface) {
+        this.userface = userface;
+    }
+
+    public Integer getIsenable() {
+        return isenable;
+    }
+
+    public void setIsenable(Integer isenable) {
+        this.isenable = isenable;
     }
 }
