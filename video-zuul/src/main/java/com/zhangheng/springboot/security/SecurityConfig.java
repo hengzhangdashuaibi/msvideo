@@ -1,6 +1,7 @@
 package com.zhangheng.springboot.security;
 
 import com.zhangheng.springboot.custom.CustomUserDetailsService;
+import com.zhangheng.springboot.handler.AuthenticationAccessDeniedHandler;
 import com.zhangheng.springboot.properties.CasProperties;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
@@ -32,6 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CasProperties casProperties;
+
+    //注入自定义的权限不够拦截类
+    @Autowired
+    private AuthenticationAccessDeniedHandler authenticationAccessDeniedHandler;
 
     /**定义认证用户信息获取来源，密码校验规则等*/
     @Override
@@ -71,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(casLogoutFilter(), LogoutFilter.class)
                 .addFilterBefore(singleSignOutFilter(), CasAuthenticationFilter.class);
 
-        //http.csrf().disable(); //禁用CSRF
+        http.csrf().disable().exceptionHandling().accessDeniedHandler(authenticationAccessDeniedHandler); //禁用CSRF
     }
 
     /**认证的入口*/
