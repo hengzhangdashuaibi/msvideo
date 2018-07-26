@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * Created by 蜡笔小新不爱吃青椒 on 2018/7/24.
  *
- * 用户权限表
+ * 用户表
  */
 public class User {
 
