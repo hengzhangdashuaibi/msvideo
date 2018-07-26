@@ -18,4 +18,16 @@ public interface UserInfoFeign {
     @RequestMapping(value = "/msvideo/user/getUserInfoByUsername",method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     String getUserInfoByUsername(@RequestParam("username") String username);
+
+
+    /**
+     * 根据用户名获取所拥有的所有角色
+     */
+    @RequestMapping(value = "/msvideo/user/getUserAndRoleInfoByUsername",method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    String getUserAndRoleInfoByUsername(@RequestParam("username") String username);
+
+    /**
+     *
+     */
 }
