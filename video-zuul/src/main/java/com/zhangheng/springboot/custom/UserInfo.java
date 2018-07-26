@@ -1,9 +1,10 @@
 package com.zhangheng.springboot.custom;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by 蜡笔小新不爱吃青椒 on 2018/7/20.
@@ -19,7 +20,7 @@ public class UserInfo implements UserDetails {
     /**
      * 用户名称
      */
-    private String name;
+//    private String name;
 
     /**
      * 登录名称
@@ -30,6 +31,16 @@ public class UserInfo implements UserDetails {
      * 登录密码
      */
     private String password;
+
+    /**
+     *用户头像
+     */
+    private String userface;
+
+    /**
+     * 用户所拥有的角色
+     */
+    private List<Role> roles;
 
     private boolean isAccountNonExpired = true;
 
@@ -49,13 +60,13 @@ public class UserInfo implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public String getUsername() {
         return username;
@@ -112,5 +123,34 @@ public class UserInfo implements UserDetails {
     public void setAuthorities(Set<AuthorityInfo> authorities) {
         this.authorities = authorities;
     }
+
+    public String getUserface() {
+        return userface;
+    }
+
+    public void setUserface(String userface) {
+        this.userface = userface;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    /**
+     * 实现单用户多角色
+     * @return
+     */
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        for (Role role : roles) {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return authorities;
+//    }
+
 }
 
