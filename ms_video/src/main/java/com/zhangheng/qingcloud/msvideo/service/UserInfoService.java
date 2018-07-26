@@ -14,4 +14,10 @@ public interface UserInfoService {
      */
     YHResult getUserInfoByUsername(Map<String, String> params);
 
+
+    /**
+     * 根据用户名称查询用所拥有的角色
+     */
+    YHResult getUserAndRoleInfoByUsername(Map<String, String> params);
+
 }

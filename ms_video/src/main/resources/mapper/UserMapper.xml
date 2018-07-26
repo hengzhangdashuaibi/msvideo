@@ -14,4 +14,24 @@
          u.isenable = 1
 
     </select>
+
+    <!--根据用户名查询用户所拥有的角色-->
+    <select id="getUserAndRoleInfoByUsername" resultType="map">
+        SELECT
+            u.username,
+            u.isenable,
+            r.`name`,
+            r.nameZh,
+            u.`password`
+        FROM
+            USER u
+        INNER JOIN user_role ur ON u.id = ur.userid
+        INNER JOIN role r ON r.id = ur.roleid
+        WHERE
+          u.username = #{username}
+         AND
+            u.isenable = 1
+
+    </select>
+
 </mapper>

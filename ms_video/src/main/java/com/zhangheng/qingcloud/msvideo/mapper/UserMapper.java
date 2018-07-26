@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +20,7 @@ public interface UserMapper extends YHMapper<User>{
     //根据用户名查询用户信息(包括角色)
     Map<String,Object> getUserInfoByUsername(@Param("username") String username);
 
+   //根据用户名查询用户所拥有的角色
+    List<Map<String,Object>> getUserAndRoleInfoByUsername(@Param("username") String username);
 
 }

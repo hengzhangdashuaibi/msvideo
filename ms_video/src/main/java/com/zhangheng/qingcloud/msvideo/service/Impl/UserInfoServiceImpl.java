@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,5 +28,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         Map<String, Object> userInfoByUsername = userMapper.getUserInfoByUsername(params.get("username"));
         return YHResult.ok(userInfoByUsername);
+    }
+
+    /**
+     * 根据用户查询用户所拥有的角色信息
+     * @param params
+     * @return
+     */
+    @Override
+    public YHResult getUserAndRoleInfoByUsername(Map<String, String> params) {
+
+        List<Map<String,Object>> userAndRoleInfoByUsername = userMapper.getUserAndRoleInfoByUsername(params.get("username"));
+
+        return YHResult.ok(userAndRoleInfoByUsername);
     }
 }

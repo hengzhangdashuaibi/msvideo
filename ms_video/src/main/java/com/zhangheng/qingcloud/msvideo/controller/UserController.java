@@ -56,7 +56,35 @@ public class UserController {
         }catch (Exception e){
             log.info(e.getMessage());
             log.info("getUserInfoByUsername接口 异常!");
-            return null;
+            return YHResult.build(500,"接口异常!");
         }
+    }
+
+
+    /**
+     * 根据用户名查询用户所拥有的角色
+     */
+    @ApiOperation(value = "CAS用户信息", response = String.class, notes = "根据用户名获取用户所拥有的角色", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", required = true, name = "username", dataType = "String", value = "用户名"),
+
+    })
+    @RequestMapping(value = "/getUserAndRoleInfoByUsername", method = RequestMethod.POST)
+    public YHResult getUserAndRoleInfoByUsername(
+            @RequestParam(value = "username", required = true) String username,
+            HttpServletRequest request
+    ){
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("username",username);
+        try {
+            YHResult userAndRoleInfoByUsername = userInfoService.getUserAndRoleInfoByUsername(param);
+            log.info("getUserAndRoleInfoByUsername 接口返回数据:"+userAndRoleInfoByUsername);
+            return userAndRoleInfoByUsername;
+        }catch (Exception e){
+            log.info(e.getMessage());
+            log.info("getUserAndRoleInfoByUsername 异常!");
+            return YHResult.build(500,"接口异常!");
+        }
+
     }
 }
