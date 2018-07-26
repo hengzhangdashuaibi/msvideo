@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * 调用ms_video的微服务的api
  */
-@FeignClient(value = "service-video", url = "localhost:8762")
+@FeignClient(value = "msvideo", url = "localhost:8763")
 public interface UserInfoFeign {
 
     @RequestMapping(value = "/msvideo/user/getUserInfoByUsername",method = RequestMethod.POST,
