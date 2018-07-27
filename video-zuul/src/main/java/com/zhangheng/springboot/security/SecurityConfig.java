@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//配置安全策略
-                .antMatchers("/","/hello").permitAll()//定义/请求不需要验证
+                .antMatchers("/","/hello","/profile").permitAll()//定义/请求不需要验证
                 .antMatchers("/**/api/**").permitAll()//定义规则那些请求不需要认证
 //                .antMatchers("/**/**.html").permitAll()//定义那些前端页面不需要认证
                 .anyRequest().authenticated()//其余的所有请求都需要验证

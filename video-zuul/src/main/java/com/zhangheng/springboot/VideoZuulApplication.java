@@ -6,6 +6,7 @@ import com.zhangheng.springboot.filter.post.LoginResponseFilter;
 import com.zhangheng.springboot.filter.pre.PreFilter;
 import com.zhangheng.springboot.filter.routing.RoutingFilter;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
+@EnableAutoConfiguration
 @EnableZuulProxy
 @EnableFeignClients//开启使用Feign调用不同微服务的api
 public class VideoZuulApplication {
@@ -51,27 +53,5 @@ public class VideoZuulApplication {
 		return new RoutingFilter();
 	}
 
-	@RequestMapping("/")
-	public String index() {
-		return "访问了首页哦";
-	}
 
-	@RequestMapping("/hello")
-	public String hello() {
-		return "不验证哦";
-	}
-
-	@PreAuthorize("hasAuthority('TEST')")//有TEST权限的才能访问
-	@RequestMapping("/security")
-	public String security() {
-		return "hello world security";
-	}
-
-	@PreAuthorize("hasAuthority('ADMIN')")//必须要有ADMIN权限的才能访问
-	@RequestMapping("/authorize")
-	public String authorize() {
-		return "有权限访问";
-	}
-
-	/**这里注意的是，TEST与ADMIN只是权限编码，可以自己定义一套规则，根据实际情况即可*/
 }

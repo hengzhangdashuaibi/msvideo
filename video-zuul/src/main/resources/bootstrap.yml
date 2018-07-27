@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: video-zuul
+  cloud:
+    config:
+      uri: http://user:123456@localhost:8888/
+      profile: test
+      label: master
