@@ -1,5 +1,6 @@
 package com.zhangheng.qingcloud.msvideo.service.Impl;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.zhangheng.qingcloud.msvideo.mapper.UserMapper;
 import com.zhangheng.qingcloud.msvideo.service.UserInfoService;
 import com.zhangheng.qingcloud.msvideo.util.YHResult;
@@ -24,6 +25,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     private UserMapper userMapper;
 
     @Override
+    @HystrixCommand
     public YHResult getUserInfoByUsername(Map<String, String> params) {
 
         Map<String, Object> userInfoByUsername = userMapper.getUserInfoByUsername(params.get("username"));
@@ -36,6 +38,7 @@ public class UserInfoServiceImpl implements UserInfoService {
      * @return
      */
     @Override
+    @HystrixCommand
     public YHResult getUserAndRoleInfoByUsername(Map<String, String> params) {
 
         List<Map<String,Object>> userAndRoleInfoByUsername = userMapper.getUserAndRoleInfoByUsername(params.get("username"));
