@@ -134,7 +134,11 @@
             <artifactId>cas-client-autoconfig-support</artifactId>
             <version>1.5.0-GA</version>
         </dependency>
-
+        <!--添加日志管理依赖-->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
 
     </dependencies>
 
