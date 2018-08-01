@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope//刷新配置
 public class TestController {
 
-    @Value("${profile}")
-    private String profile;
-
-    @RequestMapping("/profile")
-    public String from() {
-        return this.profile;
-    }
+//    @Value("${profile}")
+//    private String profile;
+//
+//    @RequestMapping("/profile")
+//    public String from() {
+//        return this.profile;
+//    }
 
 
     @RequestMapping("/")
