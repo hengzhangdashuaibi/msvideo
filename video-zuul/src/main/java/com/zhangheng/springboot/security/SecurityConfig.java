@@ -2,6 +2,7 @@ package com.zhangheng.springboot.security;
 
 import com.zhangheng.springboot.custom.CustomUserDetailsService;
 import com.zhangheng.springboot.handler.AuthenticationAccessDeniedHandler;
+import com.zhangheng.springboot.handler.UrlFilterInvocationSecurityMetadataSource;
 import com.zhangheng.springboot.properties.CasProperties;
 import org.jasig.cas.client.session.SingleSignOutFilter;
 import org.jasig.cas.client.validation.Cas20ServiceTicketValidator;
@@ -13,12 +14,14 @@ import org.springframework.security.cas.authentication.CasAssertionAuthenticatio
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
 import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
 import org.springframework.security.cas.web.CasAuthenticationFilter;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
@@ -37,6 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //注入自定义的权限不够拦截类
     @Autowired
     private AuthenticationAccessDeniedHandler authenticationAccessDeniedHandler;
+
+    //注入路径拦截
+    @Autowired
+    private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
 
     /**定义认证用户信息获取来源，密码校验规则等*/
     @Override
@@ -60,6 +67,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//配置安全策略
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                        o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);//将自己定义的路径拦截注入
+//                        o.setAccessDecisionManager(urlAccessDecisionManager);
+                        return o;
+                    }
+                })
                 .antMatchers("/","/hello","/profile").permitAll()//定义/请求不需要验证
                 .antMatchers("/**/api/**").permitAll()//定义规则那些请求不需要认证
 //                .antMatchers("/**/**.html").permitAll()//定义那些前端页面不需要认证
