@@ -163,6 +163,13 @@
                 <configuration>
                     <mainClass>com.zhangheng.qingcloud.msvideo.MsVideoApplication</mainClass>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <!--使用jib快速构建摆脱dockerfile文件-->
             <plugin>
