@@ -69,6 +69,26 @@
             <groupId>com.hazelcast</groupId>
             <artifactId>hazelcast</artifactId>
         </dependency>
+        <!--hystrix-ui-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <!--turbine-ui-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <!--activiti-ui-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui-activiti</artifactId>
+            <version>1.5.4</version>
+        </dependency>
 
     </dependencies>
 
