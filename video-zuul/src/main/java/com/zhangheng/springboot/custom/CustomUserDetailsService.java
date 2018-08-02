@@ -9,14 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.cas.authentication.CasAssertionAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by 蜡笔小新不爱吃青椒 on 2018/7/20.
@@ -100,10 +99,12 @@ public class CustomUserDetailsService
                     JSONArray jsonArray = parseObject.getJSONArray("data");
                     if(jsonArray.size()>0 && jsonArray!=null){
                         JSONObject object;
-                        Set<AuthorityInfo> authorities = new HashSet<AuthorityInfo>();
+//                        Set<AuthorityInfo> authorities = new HashSet<AuthorityInfo>();
+                        List<GrantedAuthority> authorities =new ArrayList<>();
 
                         for (int i = 0; i <jsonArray.size() ; i++) {
                             object = jsonArray.getJSONObject(i);
+                            authorities.add(new SimpleGrantedAuthority(object.getString("name")));
                             AuthorityInfo authorityInfo = new AuthorityInfo(object.getString("name"));
                             authorities.add(authorityInfo);
                         }

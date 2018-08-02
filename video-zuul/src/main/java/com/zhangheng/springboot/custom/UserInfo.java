@@ -50,7 +50,8 @@ public class UserInfo implements UserDetails {
 
     private boolean isEnabled = true;
 
-    private Set<AuthorityInfo> authorities = new HashSet<>();
+//    private Set<AuthorityInfo> authorities = new HashSet<>();
+   List<GrantedAuthority> authorities = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -116,13 +117,13 @@ public class UserInfo implements UserDetails {
         isEnabled = enabled;
     }
 
-    public Set<AuthorityInfo> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<AuthorityInfo> authorities) {
-        this.authorities = authorities;
-    }
+//    public Set<AuthorityInfo> getAuthorities() {
+//        return authorities;
+//    }
+//
+//    public void setAuthorities(Set<AuthorityInfo> authorities) {
+//        this.authorities = authorities;
+//    }
 
     public String getUserface() {
         return userface;
@@ -138,6 +139,15 @@ public class UserInfo implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public List<GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     /**

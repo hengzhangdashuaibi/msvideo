@@ -34,16 +34,21 @@ public class TestController {
         return "不验证哦";
     }
 
-    @PreAuthorize("hasAuthority('TEST')")//有TEST权限的才能访问
+//    @PreAuthorize("hasAuthority('TEST')")//有TEST权限的才能访问
     @RequestMapping("/security")
     public String security() {
         return "hello world security";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")//必须要有ADMIN权限的才能访问
+//    @PreAuthorize("hasAuthority('ADMIN')")//必须要有ADMIN权限的才能访问
     @RequestMapping("/authorize")
     public String authorize() {
         return "有权限访问";
+    }
+
+    @RequestMapping("/authorize/test")
+    public String test() {
+        return "用于测试正则匹配路径";
     }
 
     /**这里注意的是，TEST与ADMIN只是权限编码，可以自己定义一套规则，根据实际情况即可*/

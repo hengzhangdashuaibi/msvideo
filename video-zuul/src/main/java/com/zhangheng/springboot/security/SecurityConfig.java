@@ -2,6 +2,7 @@ package com.zhangheng.springboot.security;
 
 import com.zhangheng.springboot.custom.CustomUserDetailsService;
 import com.zhangheng.springboot.handler.AuthenticationAccessDeniedHandler;
+import com.zhangheng.springboot.handler.UrlAccessDecisionManager;
 import com.zhangheng.springboot.handler.UrlFilterInvocationSecurityMetadataSource;
 import com.zhangheng.springboot.properties.CasProperties;
 import org.jasig.cas.client.session.SingleSignOutFilter;
@@ -45,6 +46,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
 
+    @Autowired
+    private UrlAccessDecisionManager urlAccessDecisionManager;
+
     /**定义认证用户信息获取来源，密码校验规则等*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -71,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
                         o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);//将自己定义的路径拦截注入
-//                        o.setAccessDecisionManager(urlAccessDecisionManager);
+                        o.setAccessDecisionManager(urlAccessDecisionManager);
                         return o;
                     }
                 })
