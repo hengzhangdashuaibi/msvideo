@@ -27,4 +27,10 @@ public interface UserMapper extends YHMapper<User>{
     //根据用户名查询用户信息
 //     @Select("SELECT * FROM User WHERE username = #{username}")
 
+    //获取所有的后台接口
+    List<Map<String,Object>> getAllApi();
+
+    //根据apiid获取api所拥有的访问角色权限
+    List<Map<String,Object>> getApiRoleByApiId(@Param("apiid") Integer apiid);
+
 }

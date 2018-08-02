@@ -45,4 +45,29 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         return YHResult.ok(userAndRoleInfoByUsername);
     }
+
+    /**
+     * 获取后台的所有api接口
+     * @return
+     */
+    @Override
+    @HystrixCommand
+    public YHResult getAllApi() {
+        List<Map<String, Object>> allApi = userMapper.getAllApi();
+        return YHResult.ok(allApi);
+    }
+
+
+    /**
+     * 根据apiid获取api所拥有的访问角色权限
+     * @param params
+     * @return
+     */
+    @Override
+    @HystrixCommand
+    public YHResult getApiRoleByApiId(Map<String, Object> params) {
+
+        List<Map<String, Object>> apiRoleByApiId = userMapper.getApiRoleByApiId(Integer.parseInt(params.get("apiid")+""));
+        return YHResult.ok(apiRoleByApiId);
+    }
 }

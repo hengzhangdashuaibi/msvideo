@@ -20,4 +20,14 @@ public interface UserInfoService {
      */
     YHResult getUserAndRoleInfoByUsername(Map<String, String> params);
 
+    /**
+     * 获取所有的后台api接口
+     */
+    YHResult getAllApi();
+
+    /**
+     * 根据apiid获取api所拥有的访问角色权限
+     */
+    YHResult getApiRoleByApiId(Map<String, Object> params);
+
 }

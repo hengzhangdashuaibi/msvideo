@@ -87,4 +87,50 @@ public class UserController {
         }
 
     }
+
+    /**
+     * 获取所有的api接口
+     */
+    @ApiOperation(value = "后台api信息", response = String.class, notes = "获取后台所有api", httpMethod = "POST")
+    @ApiImplicitParams({
+
+    })
+    @RequestMapping(value = "/getAllApi", method = RequestMethod.POST)
+    public YHResult getAllApi(HttpServletRequest request){
+
+        try {
+            YHResult allApi = userInfoService.getAllApi();
+            log.info("getAllApi 接口返回数据:"+allApi);
+            return allApi;
+        }catch (Exception e){
+            log.info(e.getMessage());
+            log.info("getAllApi 异常!");
+            return YHResult.build(500,"接口异常!");
+        }
+    }
+
+    /**
+     * 根据apiid获取api所拥有的访问角色权限
+     */
+    @ApiOperation(value = "后台api信息", response = String.class, notes = "根据apiid获取api所拥有的访问角色权限", httpMethod = "POST")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", required = true, name = "apiid", dataType = "int", value = "apiid"),
+    })
+    @RequestMapping(value = "/getApiRoleByApiId", method = RequestMethod.POST)
+    public YHResult getApiRoleByApiId(
+            @RequestParam(value = "apiid", required = true) Integer apiid,
+            HttpServletRequest request
+    ){
+        Map<String, Object> param = new HashMap<String, Object>();
+        param.put("apiid",apiid);
+        try {
+            YHResult apiRoleByApiId = userInfoService.getApiRoleByApiId(param);
+            log.info("getApiRoleByApiId 接口返回数据:"+apiRoleByApiId);
+            return apiRoleByApiId;
+        }catch (Exception e){
+            log.info(e.getMessage());
+            log.info("getApiRoleByApiId 异常!");
+            return YHResult.build(500,"接口异常!");
+        }
+    }
 }

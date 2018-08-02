@@ -34,4 +34,23 @@
 
     </select>
 
+    <!--获取后台所有api接口-->
+    <select id="getAllApi" resultType="map">
+        SELECT
+        *
+        FROM
+        api
+    </select>
+
+    <!--根据apiid获取api所拥有的访问角色权限-->
+    <select id="getApiRoleByApiId" resultType="map">
+        SELECT
+	    r.*
+        FROM
+        role_api ra
+        INNER JOIN role r ON ra.roleid = r.id
+        WHERE
+	    ra.apiid = #{apiid}
+    </select>
+
 </mapper>
