@@ -28,6 +28,16 @@ public interface UserInfoFeign {
     String getUserAndRoleInfoByUsername(@RequestParam("username") String username);
 
     /**
-     *
+     *获取后台所有的api
      */
+    @RequestMapping(value = "/msvideo/user/getAllApi",method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    String getAllApi();
+
+    /**
+     * 根据apiid获取api所拥有的访问角色权限
+     */
+    @RequestMapping(value = "/msvideo/user/getApiRoleByApiId",method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    String getApiRoleByApiId(@RequestParam("apiid") Integer apiid);
 }
