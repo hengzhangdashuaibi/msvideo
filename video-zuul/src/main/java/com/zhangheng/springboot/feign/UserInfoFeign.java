@@ -1,5 +1,6 @@
 package com.zhangheng.springboot.feign;
 
+import com.zhangheng.springboot.utils.YHResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,4 +41,11 @@ public interface UserInfoFeign {
     @RequestMapping(value = "/msvideo/user/getApiRoleByApiId",method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     String getApiRoleByApiId(@RequestParam("apiid") Integer apiid);
+
+    /**
+     * 前端登录
+     */
+    @RequestMapping(value = "/msvideo/user/appLogin",method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    YHResult appLogin(@RequestParam("username") String username, @RequestParam("password") String password);
 }
