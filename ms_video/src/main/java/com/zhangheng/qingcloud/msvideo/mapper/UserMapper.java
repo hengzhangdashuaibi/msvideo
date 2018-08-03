@@ -33,4 +33,7 @@ public interface UserMapper extends YHMapper<User>{
     //根据apiid获取api所拥有的访问角色权限
     List<Map<String,Object>> getApiRoleByApiId(@Param("apiid") Integer apiid);
 
+    //前端用户登录接口
+    Map<String,Object> appLogin(@Param("username") String username,@Param("password") String password);
+
 }

@@ -70,4 +70,13 @@ public class UserInfoServiceImpl implements UserInfoService {
         List<Map<String, Object>> apiRoleByApiId = userMapper.getApiRoleByApiId(Integer.parseInt(params.get("apiid")+""));
         return YHResult.ok(apiRoleByApiId);
     }
+
+    @Override
+    @HystrixCommand
+    public YHResult appLogin(Map<String, String> params) {
+
+        Map<String, Object> map = userMapper.appLogin(params.get("username") + "", params.get("password") + "");
+
+        return YHResult.ok(map);
+    }
 }

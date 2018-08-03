@@ -30,4 +30,9 @@ public interface UserInfoService {
      */
     YHResult getApiRoleByApiId(Map<String, Object> params);
 
+    /**
+     * 前端用户登录
+     */
+    YHResult appLogin(Map<String, String> params);
+
 }

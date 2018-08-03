@@ -53,4 +53,15 @@
 	    ra.apiid = #{apiid}
     </select>
 
+    <!--前端登录-->
+    <select id="appLogin" resultType="map">
+        SELECT
+        *
+        FROM
+        USER u
+        WHERE
+        u.username = #{username}
+        AND
+        u.password = #{password}
+    </select>
 </mapper>
