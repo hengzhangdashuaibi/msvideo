@@ -2,6 +2,9 @@ package com.zhangheng.springboot.filter.pre;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.zhangheng.springboot.controller.VUserInfoController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +16,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class PreFilter extends ZuulFilter{
 
+
+    //日志
+    private final static Logger logger = LoggerFactory.getLogger(PreFilter.class);
+
     /**
      * 返回一个字符代表过滤器的类型，在zuul中定义了四种不同生命周期的过滤器类型。
      * pre:可以在请求被路由之前调用。
@@ -23,6 +30,9 @@ public class PreFilter extends ZuulFilter{
      */
     @Override
     public String filterType() {
+
+        logger.info("过滤前被调用!!!");
+
         return "pre";
     }
 
