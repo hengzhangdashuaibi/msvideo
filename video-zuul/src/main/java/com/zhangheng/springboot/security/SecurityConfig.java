@@ -2,6 +2,7 @@ package com.zhangheng.springboot.security;
 
 import com.zhangheng.springboot.custom.CustomUserDetailsService;
 import com.zhangheng.springboot.handler.AuthenticationAccessDeniedHandler;
+import com.zhangheng.springboot.handler.CasAuthenticationEntryPoint;
 import com.zhangheng.springboot.handler.UrlAccessDecisionManager;
 import com.zhangheng.springboot.handler.UrlFilterInvocationSecurityMetadataSource;
 import com.zhangheng.springboot.properties.CasProperties;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAssertionAuthenticationToken;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
-import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
+//import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
 import org.springframework.security.cas.web.CasAuthenticationFilter;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -48,6 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UrlAccessDecisionManager urlAccessDecisionManager;
+
+    @Autowired
+    private CasAuthenticationEntryPoint casAuthenticationEntryPoint;
 
     /**定义认证用户信息获取来源，密码校验规则等*/
     @Override
@@ -89,7 +93,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin();//使用form表单登录
 
-        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint())
+//        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint())
+        //自定义
+        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint)
                 .and()
                 .addFilter(casAuthenticationFilter())
                 .addFilterBefore(casLogoutFilter(), LogoutFilter.class)
@@ -99,13 +105,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**认证的入口*/
-    @Bean
-    public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
-        CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
-        casAuthenticationEntryPoint.setLoginUrl(casProperties.getCasServerLoginUrl());
-        casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
-        return casAuthenticationEntryPoint;
-    }
+//    @Bean
+//    public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
+//        CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
+//        casAuthenticationEntryPoint.setLoginUrl(casProperties.getCasServerLoginUrl());
+//        casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
+//        return casAuthenticationEntryPoint;
+//    }
 
     /**指定service相关信息*/
     @Bean
