@@ -1,9 +1,11 @@
 package com.zhangheng.springboot.handler;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhangheng.springboot.properties.CasProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.ServletException;
@@ -31,7 +33,8 @@ public class CasAuthenticationEntryPoint implements AuthenticationEntryPoint {
 //            servletRequest.
 //            response.sendRedirect("/login");
             PrintWriter out = response.getWriter();
-            out.write("{\"code\":\"301\",\"redirect\":"+casProperties.getCasServerLoginUrl()+"}");
+            out.write(getJson());
+//            out.write("{code:301,redirect:"+casProperties.getCasServerLoginUrl()+"}");
             out.flush();
             out.close();
         }
@@ -40,6 +43,20 @@ public class CasAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public static boolean isAjaxRequest(HttpServletRequest request) {
         String ajaxFlag = request.getHeader("X-Requested-With");
         return ajaxFlag != null && "XMLHttpRequest".equals(ajaxFlag);
+    }
+
+
+    @ResponseBody
+    public String getJson(){
+//        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonDate = new JSONObject();
+//        for(int i = 0 ; i < list.size() ; i++){
+//            Object object = list.get(i);
+//            jsonArray.put(JsonMapper.toJsonString(object));
+//        }
+        jsonDate.put("code", 301);
+        jsonDate.put("redirect", casProperties.getCasServerLoginUrl());
+        return jsonDate.toString();
     }
 
 }
