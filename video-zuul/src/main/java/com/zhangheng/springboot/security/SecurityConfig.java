@@ -78,13 +78,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-                        o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);//将自己定义的路径拦截注入
                         o.setAccessDecisionManager(urlAccessDecisionManager);
+                        o.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource);//将自己定义的路径拦截注入
                         return o;
                     }
                 })
                 .antMatchers("/","/hello","/profile").permitAll()//定义/请求不需要验证
-                .antMatchers("/**/api/**").permitAll()//定义规则那些请求不需要认证
+//                .antMatchers("/**/api/**").permitAll()//定义规则那些请求不需要认证
 //                .antMatchers("/**/**.html").permitAll()//定义那些前端页面不需要认证
                 .anyRequest().authenticated()//其余的所有请求都需要验证
                 .and()
@@ -95,7 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint())
         //自定义
-        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint)
+        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint())
                 .and()
                 .addFilter(casAuthenticationFilter())
                 .addFilterBefore(casLogoutFilter(), LogoutFilter.class)
@@ -105,13 +105,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**认证的入口*/
-//    @Bean
-//    public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
-//        CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
-//        casAuthenticationEntryPoint.setLoginUrl(casProperties.getCasServerLoginUrl());
-//        casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
-//        return casAuthenticationEntryPoint;
-//    }
+    @Bean
+    public CasAuthenticationEntryPoint casAuthenticationEntryPoint() {
+        CasAuthenticationEntryPoint casAuthenticationEntryPoint = new CasAuthenticationEntryPoint();
+        casAuthenticationEntryPoint.setLoginUrl(casProperties.getCasServerLoginUrl());
+        casAuthenticationEntryPoint.setServiceProperties(serviceProperties());
+        return casAuthenticationEntryPoint;
+    }
 
     /**指定service相关信息*/
     @Bean
@@ -136,7 +136,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public CasAuthenticationProvider casAuthenticationProvider() {
         CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
         casAuthenticationProvider.setAuthenticationUserDetailsService(customUserDetailsService());
-        //casAuthenticationProvider.setUserDetailsService(customUserDetailsService()); //这里只是接口类型，实现的接口不一样，都可以的。
+//        casAuthenticationProvider.setUserDetailsService(customUserDetailsService()); //这里只是接口类型，实现的接口不一样，都可以的。
         casAuthenticationProvider.setServiceProperties(serviceProperties());
         casAuthenticationProvider.setTicketValidator(cas20ServiceTicketValidator());
         casAuthenticationProvider.setKey("casAuthenticationProviderKey");
