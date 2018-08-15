@@ -38,6 +38,7 @@ public class PreFilter extends ZuulFilter{
 
     /**
      * 通过int定义过滤器执行的顺序
+     * 数字越小表示优先级越高
      * @return
      */
     @Override
