@@ -152,6 +152,12 @@
 			<version>${swagger2.version}</version>
 		</dependency>
 
+		<!--对zuul的重试机制依赖-->
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+
 	</dependencies>
 
 
