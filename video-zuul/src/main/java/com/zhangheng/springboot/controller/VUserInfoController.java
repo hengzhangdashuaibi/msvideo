@@ -8,10 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -43,12 +40,12 @@ public class VUserInfoController {
      */
       @PostMapping("/appLogin")
     public YHResult appLogin(
-              @RequestParam(value = "username", required = true) String username,
-              @RequestParam(value = "password", required = true) String password,
+              @RequestBody Map<String,Object> params,
             HttpServletRequest request
       ){
           try {
-              YHResult appLogin = userInfoFeign.appLogin(username, password);
+//              params.put("username",username)
+              YHResult appLogin = userInfoFeign.appLogin(params.get("username")+"", params.get("password")+"");
               return appLogin;
           }catch (Exception e){
               logger.error(e.getMessage());
