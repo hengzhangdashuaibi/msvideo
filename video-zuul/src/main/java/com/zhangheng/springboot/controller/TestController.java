@@ -26,7 +26,7 @@ public class TestController {
 
     @RequestMapping("/")
     public String index() {
-        return "访问了首页哦";
+        return "权限获取成功!";
     }
 
     @RequestMapping("/hello")
