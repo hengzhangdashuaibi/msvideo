@@ -61,6 +61,7 @@ public class PreFilter extends ZuulFilter{
      */
     @Override
     public Object run() {
+        logger.info("过滤前被调用!!!");
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
         Object accessToken = request.getParameter("accessToken");
