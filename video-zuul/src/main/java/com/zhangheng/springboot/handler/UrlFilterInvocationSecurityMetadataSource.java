@@ -83,8 +83,9 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
             }
         }
         //没有匹配都需要进行登录验证
-        return SecurityConfig.createList("ROLE_LOGIN");
-
+//        return SecurityConfig.createList("ROLE_LOGIN");
+        //没有匹配上的不进行匹配验证
+        return null;
     }
 
     @Override
