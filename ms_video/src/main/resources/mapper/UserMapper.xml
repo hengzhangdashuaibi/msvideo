@@ -51,6 +51,8 @@
         INNER JOIN role r ON ra.roleid = r.id
         WHERE
 	    ra.apiid = #{apiid}
+	    AND
+	    ra.del_flag = 0
     </select>
 
     <!--前端登录-->
