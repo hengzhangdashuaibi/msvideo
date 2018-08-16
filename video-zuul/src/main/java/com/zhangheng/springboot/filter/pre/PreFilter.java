@@ -31,7 +31,7 @@ public class PreFilter extends ZuulFilter{
     @Override
     public String filterType() {
 
-        logger.info("过滤前被调用!!!");
+//        logger.info("过滤前被调用!!!");
 
         return "pre";
     }

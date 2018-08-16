@@ -26,11 +26,12 @@ import static org.springframework.util.ReflectionUtils.rethrowRuntimeException;
  * Created by 蜡笔小新不爱吃青椒 on 2018/7/23.
  *
  * 在routing和error过滤器之后被调用
+ * 拦截前端的登录接口后进行鉴权验证逻辑匹配
  *
  */
 public class LoginResponseFilter extends ZuulFilter{
 
-    private static Logger log = LoggerFactory.getLogger("monitor");
+    private static Logger log = LoggerFactory.getLogger(LoginResponseFilter.class);
 
     @Autowired
     private ConstantPath constantPath;
@@ -40,8 +41,11 @@ public class LoginResponseFilter extends ZuulFilter{
     public boolean shouldFilter() {
         RequestContext context = RequestContext.getCurrentContext();
         String url = context.getRequest().getRequestURL().toString();
+        log.info("请求url:"+url);
+
+        log.info("匹配结果:"+StringUtils.endsWith(url, constantPath.LOGIN_PATH));
         //只处理登录请求
-        return StringUtils.endsWith(url, constantPath.LOGIN_PATH);
+        return StringUtils.endsWith(url, constantPath.LOGIN_PATH);//直接匹配登录接口,匹配就直接拦截进行登录验证
 
     }
 
