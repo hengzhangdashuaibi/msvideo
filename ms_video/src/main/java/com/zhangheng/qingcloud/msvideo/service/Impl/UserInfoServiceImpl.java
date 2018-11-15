@@ -4,7 +4,8 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.zhangheng.qingcloud.msvideo.mapper.UserMapper;
 import com.zhangheng.qingcloud.msvideo.service.UserInfoService;
 import com.zhangheng.qingcloud.msvideo.util.YHResult;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.Map;
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
-    private static Logger log = Logger.getLogger(UserInfoServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(UserInfoServiceImpl.class);
 
 
     //注入mapper
