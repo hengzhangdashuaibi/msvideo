@@ -27,13 +27,18 @@
     <dependencies>
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server</artifactId>
-            <version>1.4.6</version>
+            <artifactId>spring-boot-admin-starter-server</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-server-ui</artifactId>
-            <version>1.4.6</version>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,54 +48,29 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
         <!--添加日志管理依赖-->
         <dependency>
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-core</artifactId>
         </dependency>
         <!--集群重启-->
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-        </dependency>
-        <!--hystrix-ui-->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
-            <version>1.5.4</version>
-        </dependency>
-
-        <!--turbine-ui-->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
-            <version>1.5.4</version>
-        </dependency>
-
-        <!--activiti-ui-->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui-activiti</artifactId>
-            <version>1.5.4</version>
-        </dependency>
-
+        <!--<dependency>-->
+            <!--<groupId>com.hazelcast</groupId>-->
+            <!--<artifactId>hazelcast</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
 
     <dependencyManagement>
