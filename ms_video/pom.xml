@@ -24,6 +24,8 @@
         <java.version>1.8</java.version>
         <swagger2.version>2.5.0</swagger2.version>
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+        <!--docker镜像前缀-->
+        <docker.image.prefix>springio</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -138,6 +140,18 @@
             <artifactId>jolokia-core</artifactId>
         </dependency>
 
+        <!--javacv开发依赖-->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.bytedeco.javacpp-presets</groupId>-->
+            <!--<artifactId>opencv-platform</artifactId>-->
+            <!--<version>3.4.1-1.4.1</version>-->
+        <!--</dependency>-->
+
     </dependencies>
 
     <dependencyManagement>
@@ -170,7 +184,7 @@
                 </executions>
             </plugin>
             <!--使用jib快速构建摆脱dockerfile文件-->
-            <plugin>
+            <!--<plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>0.9.0</version>
@@ -178,6 +192,17 @@
                     <to>
                         <image>gcr.io/my-project/image-built-with-jib</image>
                     </to>
+                </configuration>
+            </plugin>-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
                 </configuration>
             </plugin>
 
