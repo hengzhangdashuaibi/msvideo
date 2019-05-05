@@ -167,7 +167,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>app</finalName>
+        <finalName>msvideo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -197,7 +197,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.5</version>
+                <version>1.2.2</version>
                 <executions>
                     <execution>
                         <id>default</id>
