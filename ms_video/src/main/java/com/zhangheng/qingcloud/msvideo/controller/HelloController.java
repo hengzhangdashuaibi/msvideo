@@ -28,7 +28,10 @@ public class HelloController {
     public String hello() {
 //        ServiceInstance instance = client.getLocalServiceInstance();
 //        logger.info("/hello, host:"+instance.getHost()+", service_id:"+instance.getServiceId());
-        helloService.testExcutor();
+        for (int i = 0; i < 10 ; i++) {
+            helloService.testExcutor();
+        }
+
         return "Hello World!";
     }
 
