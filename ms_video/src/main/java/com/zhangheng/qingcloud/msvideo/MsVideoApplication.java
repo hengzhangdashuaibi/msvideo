@@ -13,9 +13,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @SpringBootApplication
-@EnableEurekaClient//开启Eureka注册功能
+//@EnableEurekaClient//开启Eureka注册功能
 @EnableCircuitBreaker//开启断路器功能
-@EnableDiscoveryClient//开启服务注册功能
+//@EnableDiscoveryClient//开启服务注册功能
 @EnableFeignClients
 @EnableSwagger2
 //@Import({DynamicDataSourceRegister.class}) // 注册动态多数据源

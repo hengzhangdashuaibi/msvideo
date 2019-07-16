@@ -1,5 +1,6 @@
 package com.zhangheng.qingcloud.msvideo.controller;
 
+import com.zhangheng.qingcloud.msvideo.service.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,17 @@ public class HelloController {
     @Autowired
     private DiscoveryClient client;
 
+    @Autowired
+    private HelloService helloService;
+
     @RequestMapping("/hello")
     public String hello() {
 //        ServiceInstance instance = client.getLocalServiceInstance();
 //        logger.info("/hello, host:"+instance.getHost()+", service_id:"+instance.getServiceId());
-
+        helloService.testExcutor();
         return "Hello World!";
     }
+
+
+
 }
