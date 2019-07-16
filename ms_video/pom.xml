@@ -146,12 +146,18 @@
             <artifactId>javacv-platform</artifactId>
             <version>1.5</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.bytedeco.javacpp-presets</groupId>-->
-            <!--<artifactId>opencv-platform</artifactId>-->
-            <!--<version>3.4.1-1.4.1</version>-->
-        <!--</dependency>-->
 
+        <!--配置模板-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--配置aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
