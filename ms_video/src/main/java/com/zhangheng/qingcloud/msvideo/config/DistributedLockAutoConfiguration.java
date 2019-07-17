@@ -15,7 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
  * 装配分布式锁的bean
  */
 @Configuration
-@AutoConfigureAfter(RedisAutoConfiguration.class)
+@AutoConfigureAfter(RedisAutoConfiguration.class)//自动注入在RedisAutoConfiguration类加载后
 public class DistributedLockAutoConfiguration {
 
     @Bean

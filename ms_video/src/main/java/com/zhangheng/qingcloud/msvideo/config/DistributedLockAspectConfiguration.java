@@ -25,8 +25,8 @@ import java.util.Arrays;
  */
 @Aspect
 @Configuration
-@ConditionalOnClass(DistributedLock.class)
-@AutoConfigureAfter(DistributedLockAutoConfiguration.class)
+@ConditionalOnClass(DistributedLock.class)//当存在DistributedLock类是才会DistributedLockAspectConfiguration类
+@AutoConfigureAfter(DistributedLockAutoConfiguration.class)//自动注入在DistributedLockAutoConfiguration加载前
 public class DistributedLockAspectConfiguration {
     private final Logger logger = LoggerFactory.getLogger(DistributedLockAspectConfiguration.class);
 
