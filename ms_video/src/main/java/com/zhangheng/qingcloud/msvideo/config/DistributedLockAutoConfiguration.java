@@ -19,7 +19,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 public class DistributedLockAutoConfiguration {
 
     @Bean
-    @ConditionalOnBean(RedisTemplate.class)
+    @ConditionalOnBean(RedisTemplate.class)//只有RedisTemplate类存在才会去创建RedisDistributedLock
     public DistributedLock redisDistributedLock(RedisTemplate<Object, Object> redisTemplate){
         return new RedisDistributedLock(redisTemplate);
     }
