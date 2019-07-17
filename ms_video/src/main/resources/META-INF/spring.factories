@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=
+com.zhangheng.qingcloud.msvideo.config.DistributedLockAutoConfiguration,
+com.zhangheng.qingcloud.msvideo.config.DistributedLockAspectConfiguration
