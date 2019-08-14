@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
@@ -19,6 +20,7 @@ import java.util.UUID;
  * @author zhangheng
  * @date 2019/7/17 10:41
  */
+@Service
 public class RedisDistributedLock extends AbstractDistributedLock {
     private final Logger logger = LoggerFactory.getLogger(RedisDistributedLock.class);
 
