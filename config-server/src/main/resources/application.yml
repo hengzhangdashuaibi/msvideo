@@ -1,0 +1,45 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/hengzhangdashuaibi/spring-cloud-config #例如https://github.com/cuifuan/springcloud-configuration.git
+          search-paths: service*
+          default-label: master
+#          username: git账号
+#          password: git密码
+    bus:
+      trace:
+        enabled: true
+  rabbitmq:
+    host: 10.2.159.70
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+  security:
+    user:
+      name: user
+      password: 123456
+
+eureka:
+  # 修改在服务中心的地址status为 ip+端口 【例如：10.0.0.100:88】
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoint:
+    bus-refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: refresh,bus-refresh
