@@ -1,0 +1,21 @@
+server:
+  port: 9411
+spring:
+  application:
+    name: zipkin-server
+
+  rabbitmq:
+    host: 10.2.159.70
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+eureka:
+  # 修改在服务中心的地址status为 ip+端口 【例如：10.0.0.100:88】
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
